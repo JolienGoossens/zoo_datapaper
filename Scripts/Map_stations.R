@@ -56,3 +56,8 @@ base_map <- ggplot() +
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.8) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.6) 
+
+#### Read station positions ####
+station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
+colnames(station) <- c("station", "long", "lat")
+station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal")
