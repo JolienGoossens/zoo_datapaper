@@ -47,8 +47,8 @@ theme_plot <- theme_bw() +
 col=rev(colorRampPalette(brewer.pal(9,"Blues"))(100))
 col <- c(col, rep("white", times = 2))
 
-#### Plot map ####
-ggplot() + 
+#### Plot base map ####
+base_map <- ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = layer), data = batfort, interpolate = T)+
