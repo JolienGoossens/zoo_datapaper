@@ -43,7 +43,7 @@ theme_plot <- theme_bw() +
         axis.title = element_blank(),
         axis.text = element_text(size = 16))
 
-col=rev(colorRampPalette(brewer.pal(9,"Blues"))(100))
+col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 col <- c(col, rep("white", times = 2))
 
 #### Plot base map ####
