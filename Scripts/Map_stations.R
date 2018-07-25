@@ -64,3 +64,12 @@ northSymbols()
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
 colnames(station) <- c("station", "long", "lat")
 station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal")
+
+base_map +
+  geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
+  scale_shape_manual(values = c("Monthly" = 18, "Seasonal" = 20), name = "Stations") +
+  geom_text(data = station, aes(x = long, y = lat, label = station), vjust = 0, , nudge_y = 0.02) +
+  theme(legend.position = c(0.9, 0.15),
+        legend.box = "horizontal",
+        legend.box.just = "bottom",
+        legend.title = element_blank())
