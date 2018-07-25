@@ -3,9 +3,8 @@ library(ggplot2)
 library(rgdal)
 library(raster)
 library(dplyr)
+library(ggsn)
 library(RColorBrewer)
-library(maps)
-library(mapdata)
 
 #### Read data ####
 bight <- readOGR("Data/Mapping/world_bay_gulf", layer = "world_bay_gulf")
