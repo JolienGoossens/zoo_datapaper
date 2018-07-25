@@ -46,15 +46,19 @@ theme_plot <- theme_bw() +
 col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 col <- c(col, rep("white", times = 2))
 
-#### Plot base map ####
+#### Plot base map with north and scale ####
 base_map <- ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
-  geom_raster(aes(x=x, y=y, fill = layer), data = batfort, interpolate = T)+
-  scale_fill_gradientn(colours=col) + 
+  geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
+  scale_fill_gradientn(colours=col, name = "Depth (m)") + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
-  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.8) +
-  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.6) 
+  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
+  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
+  north(data = eezfort, anchor = c(x = 3.78, y = 51.9), symbol = 4, scale = 0.15) +
+  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.6, y = 51.85), st.size = 3.5)
+
+northSymbols()
 
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
