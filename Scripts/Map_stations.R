@@ -73,3 +73,4 @@ base_map +
         legend.box = "horizontal",
         legend.box.just = "bottom",
         legend.title = element_blank())
+
