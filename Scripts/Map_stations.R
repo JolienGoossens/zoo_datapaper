@@ -33,7 +33,7 @@ eezfort <- eezfort[c(10:30),]
 belnew <- rbind(belfort[1:36,], eezfort, belfort[44:203,])
 
 #remove shapefiles from environment
-rm(bight, eez, netherlands_coast, bat, belgium, belfort, eezfort)
+rm(eez, bight, netherlands_coast, bat, belgium, belfort)
 
 #### Create theme and colours ####
 theme_plot <- theme_bw() +
