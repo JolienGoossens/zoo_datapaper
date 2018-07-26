@@ -1,0 +1,45 @@
+#### Load packages ####
+source("Scripts/Map_stations.R")
+library(lubridate)
+library(dplyr)
+
+#### Read data ####
+count <- read.csv2("Data/Count/ZooplanktonCounts.csv", stringsAsFactors = F)
+
+#### Preliminary data treatment ####
+count$X_id <- as.factor(count$X_id)
+count$Taxon <- as.factor(count$Taxon)
+count$Date <- parse_date_time(count$Date, orders = "dmy HM")
+count$Month <- month(count$Date)
+count$Year <- year(count$Date)
+
+# rename some station levels 
+count[count$Station == "lw02",]$Station <- "LW02"
+count[count$Station == "lw01",]$Station <- "LW01"
+count[count$Station == "",]$Station <- "ZG02" # "" seems to coincide entirely with ZG02
+count$Station <- as.factor(count$Station)
+
+#### Timeline with data availability ####
+unique(count$Station)
+count$Station <- factor(count$Station, levels = c("LW02", "W10", "LW01", "W09", "W07bis", "435", "421", "W08","780", "330", "ZG02", "710", "230", "215", "700", "130", "120"))
+
+# add frequency of station visits
+statjoin <- dplyr::select(station, - long, -lat)
+colnames(statjoin) <- c("Station", "Freq")
+count <- join(count, statjoin)
+
+# make smaller data frame
+count$Date2 <- lubridate::date(count$Date)
+countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq))
+
+# plot
+ggplot(data = countsum, aes(x = Date2, y = Station)) +  
+  geom_point(size = 1) +
+  theme(panel.background = element_rect(colour = "grey", fill = "white"),
+        panel.grid.major = element_line(colour = "grey"),
+        panel.grid.minor = element_line(linetype = "blank")) +
+  facet_grid(Freq~., scales = "free_y", space="free_y") +
+  theme_bw() +
+  theme(strip.text = element_text(colour = "black"),
+        strip.background = element_rect(colour="black", fill="grey")) +
+  theme(axis.title = element_blank())
