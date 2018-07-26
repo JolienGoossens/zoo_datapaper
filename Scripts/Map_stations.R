@@ -58,8 +58,6 @@ base_map <- ggplot() +
   north(data = eezfort, anchor = c(x = 3.78, y = 51.9), symbol = 4, scale = 0.15) +
   scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.6, y = 51.85), st.size = 3.5)
 
-northSymbols()
-
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
 colnames(station) <- c("station", "long", "lat")
