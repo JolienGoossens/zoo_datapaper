@@ -42,3 +42,9 @@ base_map_month <- ggplot() +
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5)
+
+# Amount of counts
+base_map_month +
+  geom_point(data = countmonsum, aes(long, lat, size = Count), alpha = 0.65) +
+  facet_wrap(~Month) +
+  theme(strip.background = element_rect(fill = "white"))
