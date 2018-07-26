@@ -39,4 +39,17 @@ count <- join(count, statjoin)
 count$Date2 <- lubridate::date(count$Date)
 countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq))
 
+# plot
+ggplot(data = countsum, aes(x = Date2, y = Station)) +  
+  geom_point(size = 1) +
+  theme(panel.background = element_rect(colour = "grey", fill = "white"),
+        panel.grid.major = element_line(colour = "grey"),
+        panel.grid.minor = element_line(linetype = "blank")) +
+  facet_grid(Freq~., scales = "free_y", space="free_y") +
+  theme_bw() +
+  theme(strip.text = element_text(colour = "black"),
+        strip.background = element_rect(colour="black", fill="grey")) +
+  theme(axis.title = element_blank())
+
+
 
