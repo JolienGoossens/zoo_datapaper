@@ -48,3 +48,9 @@ base_map_month +
   geom_point(data = countmonsum, aes(long, lat, size = Count), alpha = 0.65) +
   facet_wrap(~Month) +
   theme(strip.background = element_rect(fill = "white"))
+
+# Amount of years 
+base_map_month +
+  geom_point(data = countmonsum, aes(long, lat, size = Year), alpha = 0.65) +
+  facet_wrap(~Month) +
+  theme(strip.background = element_rect(fill = "white"))
