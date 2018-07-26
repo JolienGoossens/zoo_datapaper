@@ -35,4 +35,8 @@ statjoin <- dplyr::select(station, - long, -lat)
 colnames(statjoin) <- c("Station", "Freq")
 count <- join(count, statjoin)
 
+# make smaller data frame
+count$Date2 <- lubridate::date(count$Date)
+countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq))
+
 
