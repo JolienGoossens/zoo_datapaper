@@ -13,13 +13,6 @@ count$Date <- parse_date_time(count$Date, orders = "dmy HM")
 count$Month <- month(count$Date)
 count$Year <- year(count$Date)
 
-# issue with station names
-base_map + 
-  geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
-  scale_shape_manual(values = c("Monthly" = 18, "Seasonal" = 20), name = "Stations") +
-  geom_text(data = station, aes(x = long, y = lat, label = station), vjust = 0, , nudge_y = 0.02) +
-  geom_point(data = count[count$Station == "",], aes(x = Longitude, y = Latitude), colour = "red")
-
 # rename some station levels 
 count[count$Station == "lw02",]$Station <- "LW02"
 count[count$Station == "lw01",]$Station <- "LW01"
