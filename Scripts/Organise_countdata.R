@@ -43,6 +43,3 @@ ggplot(data = countsum, aes(x = Date2, y = Station)) +
   theme(strip.text = element_text(colour = "black"),
         strip.background = element_rect(colour="black", fill="grey")) +
   theme(axis.title = element_blank())
-
-
-
