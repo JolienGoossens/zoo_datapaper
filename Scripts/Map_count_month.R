@@ -18,3 +18,17 @@ count$Month <- plyr::revalue(count$Month, c(
   "11" = "November",
   "12" = "December"
 ))
+
+# Summarize the  data
+countmonsum <- dplyr::summarise(
+  group_by(count, Station, Year, Month),
+  Count = sum(Count)
+)
+countmonsum <- dplyr::summarise(
+  group_by(data.frame(countmonsum), Station, Month),
+  Years = length(Year),
+  Count = sum(Count)
+)
+
+colnames(station) <- c("Station", "long", "lat", "freq")
+countmonsum <- plyr::join(data.frame(countmonsum), station)
