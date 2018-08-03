@@ -36,7 +36,7 @@ countmonsum <- plyr::join(data.frame(countmonsum), station)
 #### Plot months ####
 base_map_month <- ggplot() + 
   coord_cartesian(xlim = c(2.2,3.4), ylim = c(51.05,51.9)) +
-  theme_plot() +
+  theme_plot +
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
   scale_fill_gradientn(colours=col, name = "Depth (m)") + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
