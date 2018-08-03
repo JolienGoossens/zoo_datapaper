@@ -37,7 +37,7 @@ rm(eez, bight, netherlands_coast, bat, belgium, belfort)
 
 #### Create theme and colours ####
 theme_plot <- theme_bw() +
-  theme(panel.background = element_rect(fill = "white"),
+  theme(panel.background = element_rect(fill = "burlywood"),
         panel.grid.major = element_line(linetype = "blank"),
         panel.grid.minor = element_line(linetype = "blank"),
         axis.title = element_blank(),
@@ -52,11 +52,15 @@ base_map <- ggplot() +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
   scale_fill_gradientn(colours=col, name = "Depth (m)") + 
-  geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
+  geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "burlywood", alpha = 0.5) +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
-  north(data = eezfort, anchor = c(x = 3.78, y = 51.9), symbol = 4, scale = 0.15) +
-  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.6, y = 51.85), st.size = 3.5)
+  scale_x_continuous(breaks = seq(2.2, 3.7, 0.2)) +
+  scale_y_continuous(breaks = seq(51, 51.9, 0.2)) +
+  geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.3, alpha = 0.3) + 
+  geom_hline(yintercept = seq(51, 51.9, 0.2), size = 0.3, alpha = 0.3) +
+  north(data = eezfort, anchor = c(x = 3.78, y = 51.93), symbol = 4, scale = 0.15) +
+  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.545, y = 51.85), st.size = 3.5)
 
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
@@ -66,7 +70,7 @@ station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230"
 base_map +
   geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
   scale_shape_manual(values = c("Monthly" = 18, "Seasonal" = 20), name = "Stations") +
-  geom_text(data = station, aes(x = long, y = lat, label = station), vjust = 0, , nudge_y = 0.02) +
+  geom_text(data = station, aes(x = long, y = lat, label = station), size = 5, vjust = 0, , nudge_y = 0.02) +
   theme(legend.position = c(0.9, 0.15),
         legend.box = "horizontal",
         legend.box.just = "bottom",
