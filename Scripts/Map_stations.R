@@ -55,8 +55,12 @@ base_map <- ggplot() +
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "burlywood", alpha = 0.5) +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
-  north(data = eezfort, anchor = c(x = 3.78, y = 51.9), symbol = 4, scale = 0.15) +
-  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.6, y = 51.85), st.size = 3.5)
+  scale_x_continuous(breaks = seq(2.2, 3.7, 0.2)) +
+  scale_y_continuous(breaks = seq(51, 51.9, 0.2)) +
+  geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.3, alpha = 0.3) + 
+  geom_hline(yintercept = seq(51, 51.9, 0.2), size = 0.3, alpha = 0.3) +
+  north(data = eezfort, anchor = c(x = 3.78, y = 51.93), symbol = 4, scale = 0.15) +
+  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.545, y = 51.85), st.size = 3.5)
 
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
