@@ -31,6 +31,7 @@ station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230"
 statjoin <- dplyr::select(station, - long, -lat)
 colnames(statjoin) <- c("Station", "Freq")
 count <- join(count, statjoin)
+rm(statjoin)
 
 # make smaller data frame
 count$Date2 <- lubridate::date(count$Date)
