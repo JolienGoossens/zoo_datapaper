@@ -37,7 +37,7 @@ rm(eez, bight, netherlands_coast, bat, belgium, belfort)
 
 #### Create theme and colours ####
 theme_plot <- theme_bw() +
-  theme(panel.background = element_rect(fill = "white"),
+  theme(panel.background = element_rect(fill = "burlywood"),
         panel.grid.major = element_line(linetype = "blank"),
         panel.grid.minor = element_line(linetype = "blank"),
         axis.title = element_blank(),
@@ -52,7 +52,7 @@ base_map <- ggplot() +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
   scale_fill_gradientn(colours=col, name = "Depth (m)") + 
-  geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
+  geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "burlywood", alpha = 0.5) +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
   north(data = eezfort, anchor = c(x = 3.78, y = 51.9), symbol = 4, scale = 0.15) +
