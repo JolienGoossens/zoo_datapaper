@@ -61,7 +61,6 @@ ggplot(data = taxa, aes(x = date, y = Taxon)) +
         panel.grid.major = element_line(colour = "grey"),
         panel.grid.minor = element_line(linetype = "blank")) +
   theme_bw() +
-  theme(strip.text = element_text(colour = "black"),
-        strip.background = element_rect(colour="black", fill="grey")) +
-  theme(axis.title = element_blank()) +
-  theme(legend.position = "none")
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())
