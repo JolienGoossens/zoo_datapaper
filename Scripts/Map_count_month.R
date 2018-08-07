@@ -41,14 +41,12 @@ base_map_month <- ggplot() +
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
   scale_fill_gradientn(colours=col, name = "Depth (m)") + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "white") +
-  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
-  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5)
-
-# Amount of counts
-base_map_month +
-  geom_point(data = countmonsum, aes(long, lat, size = Count), alpha = 0.65) +
-  facet_wrap(~Month) +
-  theme(strip.background = element_rect(fill = "white"))
+  geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.05, colour = "gray20") + 
+  geom_hline(yintercept = seq(51, 51.9, 0.2), size = 0.05, colour = "gray20") +
+  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.3) +
+  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.3) +
+  scale_x_continuous(breaks = seq(2.2, 3.7, 0.2)) + # no axes, but keep in case changes
+  scale_y_continuous(breaks = seq(51, 51.9, 0.2))
 
 # Amount of years 
 base_map_month +
