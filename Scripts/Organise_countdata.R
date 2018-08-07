@@ -20,8 +20,6 @@ count[count$Station == "lw01",]$Station <- "LW01"
 count[count$Station == "",]$Station <- "ZG02" # "" seems to coincide entirely with ZG02
 count$Station <- as.factor(count$Station)
 
-#### Timeline with data availability ####
-unique(count$Station)
 count$Station <- factor(count$Station, levels = c("LW02", "W10", "LW01", "W09", "W07bis", "435", "421", "W08","780", "330", "ZG02", "710", "230", "215", "700", "130", "120"))
 
 # add frequency of station visits
@@ -35,16 +33,41 @@ rm(statjoin)
 
 # make smaller data frame
 count$Date2 <- lubridate::date(count$Date)
-countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq))
+countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq, Tripaction))
+countsum <- as.data.frame(countsum)
 
-# plot
+#link tripactions to instrument
+net <- read.csv("Data/Jo_lien.csv", stringsAsFactors = F)
+colnames(net) <- c("Tripaction","Instrument")
+
+net[net$Instrument == "Plankton Net Trawl 200\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
+net[net$Instrument == "Plankton Net WP2 200\xb5m/0.70m diam.",]$Instrument <- "WP2 net"
+net[net$Instrument == "Plankton Net 10\xb5m",]$Instrument <- "Apstein net"
+net[net$Instrument == "Plankton Net Trawl 100\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
+net[net$Instrument == "Plankton Pump",]$Instrument <- "Plankton pump"
+net[net$Instrument == "Plankton Net 60\xb5m",]$Instrument <- "Apstein net"
+net[net$Instrument == "Planktonnet 60\xb5m",]$Instrument <- "Apstein net"
+net[net$Instrument == "Niskin Bottle 10L",]$Instrument <- "Niskin bottle"
+net[net$Instrument == "Planktonnet WP2",]$Instrument <- "WP2 net"
+
+countsum <- join(countsum, net)
+countsum[countsum$Tripaction == 101025,]$Instrument <- "WP2 net" #one missing value, added manually
+
+
+#### Plot the data availability per station ####
 ggplot(data = countsum, aes(x = Date2, y = Station)) +  
-  geom_point(size = 1) +
+  geom_point(aes(shape = Instrument, fill = Instrument), size = 1.5) +
+  scale_shape_manual(values = c(21,23,22), limits = c("Plankton pump", "Apstein net", "WP2 net")) + 
+  scale_fill_manual(values = c("black", "gray80", "black"), limits = c("Plankton pump", "Apstein net", "WP2 net")) +
   theme(panel.background = element_rect(colour = "grey", fill = "white"),
         panel.grid.major = element_line(colour = "grey"),
         panel.grid.minor = element_line(linetype = "blank")) +
   facet_grid(Freq~., scales = "free_y", space="free_y") +
   theme_bw() +
   theme(strip.text = element_text(colour = "black"),
-        strip.background = element_rect(colour="black", fill="grey")) +
-  theme(axis.title = element_blank())
+        strip.background = element_rect(colour="black", fill="gray80")) +
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())
+
+# Save the plot manually as Station_time_1000x334px.png
