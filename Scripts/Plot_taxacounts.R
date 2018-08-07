@@ -12,6 +12,12 @@ taxa$date <- paste(taxa$Year, taxa$Month, 1, sep = "-")
 taxa$date <- parse_date_time(taxa$date, orders = "ymd")
 taxa$Count <- as.factor(taxa$Count)
 
+# add instrument types
+countsum <- dplyr::summarise(group_by(countsum, Year, Month),
+                 Instrument = names(which.max(table(Instrument))))
+taxa <- join(taxa, countsum)
+
+
 #### Organize taxa ####
 levels(taxa$Taxon)
 taxa$Taxon <- factor(taxa$Taxon, levels = rev(c(
