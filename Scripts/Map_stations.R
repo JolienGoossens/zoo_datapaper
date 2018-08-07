@@ -50,8 +50,10 @@ col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 base_map <-  ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
-  geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
-  scale_fill_gradientn(colours=col, name = "Depth (m)") + 
+  geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T) +
+  scale_fill_gradientn(colours=col, name = "Depth (m)", na.value = "transparent",
+                       limits=c(0,60), breaks = c(0, 20, 40, 60), 
+                       guide = guide_colourbar(frame.colour = "black", ticks =F, reverse = T)) + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "moccasin", alpha = 0.5) +
   geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
