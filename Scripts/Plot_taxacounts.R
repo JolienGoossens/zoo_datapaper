@@ -53,7 +53,10 @@ taxa <- dplyr::filter(taxa, Taxon != "detritus", Taxon != "artefacts", Taxon !="
 
 #### Plot count data per taxa ####
 ggplot(data = taxa, aes(x = date, y = Taxon)) +
-  geom_point(aes(alpha = Count), size = 1.5) +
+  geom_point(aes(fill = Count, shape = Instrument), size = 1.5) +
+  scale_shape_manual(values = c(21,23,22), limits = c("Plankton pump", "Apstein net", "WP2 net")) + 
+  scale_fill_manual(values = c("gray90", "black"), limits = c(0,1)) +
+  guides(fill = "none") +
   theme(panel.background = element_rect(colour = "grey", fill = "white"),
         panel.grid.major = element_line(colour = "grey"),
         panel.grid.minor = element_line(linetype = "blank")) +
