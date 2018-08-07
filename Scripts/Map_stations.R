@@ -23,6 +23,7 @@ netherlands_coastfort <- netherlands_coastfort[80:5110,]
 #bathymetry
 batfort <- as(bat, "SpatialPixelsDataFrame")
 batfort <- as.data.frame(batfort)
+batfort[batfort$layer >=0,]$layer <- 0
 
 #Belgium
 belfort <- fortify(belgium)
