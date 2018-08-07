@@ -2,8 +2,7 @@
 source("Scripts/Organise_countdata.R")
 
 #### Check available count data per taxa
-# Check whether every month is only campaign -> correct
-dplyr::summarize(group_by(count, Year, Month))
+dplyr::summarize(group_by(count, Year, Month))# Check whether every month is only campaign -> correct
 
 # summarize data in taxa dataframe
 taxa <- dplyr::summarize(group_by(count, Year, Month, Taxon),
