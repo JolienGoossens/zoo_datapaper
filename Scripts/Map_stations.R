@@ -90,3 +90,4 @@ map_stations <- base_map +
         legend.spacing = unit(0.5, "cm"),
         legend.key.height = unit(0.5, "cm"))
 
+# Saved as Map_station_762x605px manually to maintain ratio as seen in window
