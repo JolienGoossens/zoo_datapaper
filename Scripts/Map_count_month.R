@@ -1,5 +1,6 @@
 #### Load packages ####
-source("Scripts/Organise_countdata.R") # also sources Map_stations.R
+source("Scripts/Organise_countdata.R")
+source("Scripts/Map_stations.R")
 
 #### Data organization
 # rename months
