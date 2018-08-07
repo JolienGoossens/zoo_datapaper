@@ -54,13 +54,17 @@ countsum <- join(countsum, net)
 countsum[countsum$Tripaction == 101025,]$Instrument <- "WP2 net" #one missing value, added manually
 
 
+#### Plot the data availability per station ####
 ggplot(data = countsum, aes(x = Date2, y = Station)) +  
-  geom_point(size = 1) +
+  geom_point(aes(shape = Instrument), size = 1.5) +
+  scale_shape_manual(values = c(19,0,15), limits = c("Plankton pump", "Apstein net", "WP2 net")) + 
   theme(panel.background = element_rect(colour = "grey", fill = "white"),
         panel.grid.major = element_line(colour = "grey"),
         panel.grid.minor = element_line(linetype = "blank")) +
   facet_grid(Freq~., scales = "free_y", space="free_y") +
   theme_bw() +
   theme(strip.text = element_text(colour = "black"),
-        strip.background = element_rect(colour="black", fill="grey")) +
-  theme(axis.title = element_blank())
+        strip.background = element_rect(colour="black", fill="gray90")) +
+  theme(axis.title = element_blank(),
+        legend.position = "bottom",
+        legend.title = element_blank())
