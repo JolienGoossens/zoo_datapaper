@@ -83,7 +83,10 @@ map_stations <- base_map +
   geom_text(data = station, aes(x = long, y = lat, label = station), size = 4, vjust = 0, , nudge_y = 0.02) +
   theme(legend.position = c(0.88, 0.14),
         legend.box = "horizontal",
-        legend.box.just = "bottom",
-        legend.title = element_blank())
-
+        legend.box.just = "center",
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = alpha("white", 0)),
+        legend.key = element_rect(fill = alpha("white", 0)),
+        legend.spacing = unit(0.5, "cm"),
+        legend.key.height = unit(0.5, "cm"))
 
