@@ -64,3 +64,5 @@ ggplot(data = taxa, aes(x = date, y = Taxon)) +
   theme(axis.title = element_blank(),
         legend.position = "bottom",
         legend.title = element_blank())
+
+# Save plot manually as Taxa_time_1000x360px.png
