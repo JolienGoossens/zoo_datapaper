@@ -55,8 +55,10 @@ base_map <-  ggplot() +
                        limits=c(0,60), breaks = c(0, 20, 40, 60), 
                        guide = guide_colourbar(frame.colour = "black", ticks =F, reverse = T)) + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "moccasin", alpha = 0.5) +
-  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.7) +
-  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.5, alpha = 0.5) +
+  geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.1, colour = "gray20") + 
+  geom_hline(yintercept = seq(51, 51.9, 0.2), size = 0.1, colour = "gray20") +
+  geom_path(data = bightfort, aes(x = long, y = lat, group = group), size = 0.3) +
+  geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.3) +
   scale_x_continuous(breaks = seq(2.2, 3.7, 0.2)) +
   scale_y_continuous(breaks = seq(51, 51.9, 0.2)) +
   geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.3, alpha = 0.3) + 
