@@ -42,13 +42,13 @@ theme_plot <- theme_bw() +
         panel.grid.major = element_line(linetype = "blank"),
         panel.grid.minor = element_line(linetype = "blank"),
         axis.title = element_blank(),
-        axis.text = element_text(size = 16))
+        axis.text = element_text(size = 10))
 
 col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 col <- c(col, rep("white", times = 2))
 
 #### Plot base map with north and scale ####
-base_map <- ggplot() + 
+base_map <-  ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T)+
@@ -71,8 +71,8 @@ station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230"
 base_map +
   geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
   scale_shape_manual(values = c("Monthly" = 18, "Seasonal" = 20), name = "Stations") +
-  geom_text(data = station, aes(x = long, y = lat, label = station), size = 5, vjust = 0, , nudge_y = 0.02) +
-  theme(legend.position = c(0.9, 0.15),
+  geom_text(data = station, aes(x = long, y = lat, label = station), size = 4, vjust = 0, , nudge_y = 0.02) +
+  theme(legend.position = c(0.88, 0.14),
         legend.box = "horizontal",
         legend.box.just = "bottom",
         legend.title = element_blank())
