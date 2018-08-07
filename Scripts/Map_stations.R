@@ -45,7 +45,6 @@ theme_plot <- theme_bw() +
         axis.text = element_text(size = 10))
 
 col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
-col <- c(col, rep("white", times = 2))
 
 #### Plot base map with north and scale ####
 base_map <-  ggplot() + 
