@@ -68,3 +68,5 @@ ggplot(data = countsum, aes(x = Date2, y = Station)) +
   theme(axis.title = element_blank(),
         legend.position = "bottom",
         legend.title = element_blank())
+
+# Save the plot manually as Station_time_1000x334px.png
