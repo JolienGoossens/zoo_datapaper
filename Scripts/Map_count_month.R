@@ -50,6 +50,11 @@ base_map_month <- ggplot() +
 
 # Amount of years 
 base_map_month +
-  geom_point(data = countmonsum, aes(long, lat, size = Years), alpha = 0.65) +
-  facet_wrap(~Month) +
-  theme(strip.background = element_rect(fill = "white"))
+  geom_point(data = countmonsum, aes(long, lat, size = Years), alpha = 0.7) +
+  facet_wrap(~Month, nrow = 4) + theme(aspect.ratio = 1) +
+  theme(strip.background = element_rect(fill = "white"),
+        legend.title = element_blank(),
+        legend.position = "bottom",
+        axis.text = element_blank(),
+        axis.ticks = element_blank()) +
+  guides(fill = "none")
