@@ -61,10 +61,16 @@ base_map <-  ggplot() +
   geom_path(data = belnew, aes(x = long, y = lat, group = group), size = 0.3) +
   scale_x_continuous(breaks = seq(2.2, 3.7, 0.2)) +
   scale_y_continuous(breaks = seq(51, 51.9, 0.2)) +
-  geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.3, alpha = 0.3) + 
-  geom_hline(yintercept = seq(51, 51.9, 0.2), size = 0.3, alpha = 0.3) +
-  north(data = eezfort, anchor = c(x = 3.78, y = 51.93), symbol = 4, scale = 0.15) +
-  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.545, y = 51.85), st.size = 3.5)
+  north(data = eezfort, anchor = c(x = 3.76, y = 51.92), symbol = 4, scale = 0.12) +
+  scalebar(data = eezfort, model = "WGS84",dd2km = T, dist = 10, st.dist = 0.04, anchor = c(x = 3.545, y = 51.89), st.size = 3.5) +
+  geom_text(aes(x = c(seq(2.4, 3.7, 0.2)+0.005), y = 50.96, label = seq(2.4, 3.7, 0.2)), size=2.5, hjust = 0, vjust = 0,
+            colour = "gray20", fontface = "bold") +
+  geom_text(aes(x = 2.13, y = c(seq(51.2, 51.9, 0.2)-0.015), label = seq(51.2, 51.9, 0.2)), size=2.5, hjust = 0, vjust = 0,
+            colour = "gray20", fontface = "bold") +
+  geom_text(aes(x = (2.2+0.005), y = 50.96, label = "2.2° E"), size=2.5, hjust = 0, vjust = 0, colour = "gray20", fontface = "bold") +
+  geom_text(aes(x = 2.13, y = (51-0.015), label = "51° N"), size=2.5, hjust = 0, vjust = 0, colour = "gray20", fontface = "bold") +
+  theme(axis.text = element_blank(),
+        axis.ticks = element_blank())
 
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
