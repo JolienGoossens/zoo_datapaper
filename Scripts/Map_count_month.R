@@ -58,3 +58,6 @@ base_map_month +
         axis.text = element_blank(),
         axis.ticks = element_blank()) +
   guides(fill = "none")
+
+# Save manually as Map_month_600x868px.png
+
