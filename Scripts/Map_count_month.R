@@ -61,6 +61,11 @@ base_map_month +
   guides(fill = "none",
          size = guide_legend(nrow = 1)) +
   
+  geom_text(data = countmonsum, aes(label = Month), x = Inf, y = Inf, hjust = 1.2, vjust = 1.5) +
+  theme(
+    strip.background = element_blank(),
+    strip.text = element_blank()
+  )
 
 # Save manually as Map_month_600x868px.png
 
