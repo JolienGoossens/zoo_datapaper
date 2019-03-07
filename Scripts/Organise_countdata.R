@@ -24,10 +24,7 @@ count$Station <- as.factor(count$Station)
 count$Station <- factor(count$Station, levels = c("LW02", "W10", "LW01", "W09", "W07bis", "435", "421", "W08","780", "330", "ZG02", "710", "230", "215", "700", "130", "120"))
 
 # add frequency of station visits
-station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
-colnames(station) <- c("station", "long", "lat")
-station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal")
-statjoin <- dplyr::select(station, - long, -lat)
+station <- read.delim("Data/Positions/Jolien_locaties_zooplankton.txt", stringsAsFactors=FALSE)
 colnames(statjoin) <- c("Station", "Freq")
 count <- join(count, statjoin)
 rm(statjoin)
