@@ -47,12 +47,13 @@ theme_plot <- theme_bw() +
 col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 
 #### Plot base map with north and scale ####
-base_map <-  ggplot() + 
+labs = parse(text=paste0(c(0, 20, 40, 60), "~m"))
+base_map <- ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T) +
   scale_fill_gradientn(colours=col, name = "Depth (m)", na.value = "transparent",
-                       limits=c(0,60), breaks = c(0, 20, 40, 60), 
+                       limits=c(0,60), breaks = c(0, 20, 40, 60), labels = labs,
                        guide = guide_colourbar(frame.colour = "black", ticks =F, reverse = T)) + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "moccasin", alpha = 0.5) +
   geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.1, colour = "gray20") + 
