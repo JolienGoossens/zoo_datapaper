@@ -31,7 +31,8 @@ countmonsum <- dplyr::summarise(
   Count = sum(Count)
 )
 
-colnames(station) <- c("Station", "long", "lat", "freq")
+station <- dplyr::select(station, -depth)
+colnames(station) <- c("Station", "lat", "long", "freq")
 countmonsum <- plyr::join(data.frame(countmonsum), station)
 
 #### Plot months ####
