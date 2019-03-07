@@ -72,6 +72,7 @@ base_map <- ggplot() +
   geom_text(aes(x = 2.13, y = (51-0.015), label = "51° N"), size=2.5, hjust = 0, vjust = 0, colour = "gray20", fontface = "bold") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank())
+base_map
 
 #### Read station positions ####
 station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
