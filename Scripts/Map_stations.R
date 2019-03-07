@@ -47,12 +47,13 @@ theme_plot <- theme_bw() +
 col <- colorRampPalette(brewer.pal(9,"Blues"))(100)
 
 #### Plot base map with north and scale ####
-base_map <-  ggplot() + 
+labs = parse(text=paste0(c(0, 20, 40, 60), "~m"))
+base_map <- ggplot() + 
   coord_cartesian(xlim = c(2.2,3.7), ylim = c(51,51.9)) +
   theme_plot +  
   geom_raster(aes(x=x, y=y, fill = -layer), data = batfort, interpolate = T) +
   scale_fill_gradientn(colours=col, name = "Depth (m)", na.value = "transparent",
-                       limits=c(0,60), breaks = c(0, 20, 40, 60), 
+                       limits=c(0,60), breaks = c(0, 20, 40, 60), labels = labs,
                        guide = guide_colourbar(frame.colour = "black", ticks =F, reverse = T)) + 
   geom_polygon(aes(x=long, y=lat, group=group), data = netherlands_coastfort, fill = "moccasin", alpha = 0.5) +
   geom_vline(xintercept = seq(2.2, 3.7, 0.2), size = 0.1, colour = "gray20") + 
@@ -71,11 +72,16 @@ base_map <-  ggplot() +
   geom_text(aes(x = 2.13, y = (51-0.015), label = "51° N"), size=2.5, hjust = 0, vjust = 0, colour = "gray20", fontface = "bold") +
   theme(axis.text = element_blank(),
         axis.ticks = element_blank())
+base_map
 
 #### Read station positions ####
-station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
-colnames(station) <- c("station", "long", "lat")
-station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal")
+station <- read.delim("Data/Positions/Jolien_locaties_zooplankton.txt", stringsAsFactors=FALSE)
+
+station <- station %>% dplyr::select(-ID)
+colnames(station) <- c("station", "lat", "long", "depth")
+station$station <- gsub(" ", "", station$station) #correct typos
+
+station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal") #define frequency of station visits
 
 map_stations <- base_map +
   geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
@@ -88,6 +94,9 @@ map_stations <- base_map +
         legend.background = element_rect(fill = alpha("white", 0)),
         legend.key = element_rect(fill = alpha("white", 0)),
         legend.spacing = unit(0.5, "cm"),
-        legend.key.height = unit(0.5, "cm"))
+        legend.key.height = unit(0.5, "cm"),
+        legend.spacing.x = unit(0.2, "cm"))
+map_stations
 
-# Saved as Map_station_762x605px manually to maintain ratio as seen in window
+# Saved as Map_station_762x605px.png manually to maintain ratio as seen in window
+

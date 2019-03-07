@@ -31,7 +31,8 @@ countmonsum <- dplyr::summarise(
   Count = sum(Count)
 )
 
-colnames(station) <- c("Station", "long", "lat", "freq")
+station <- dplyr::select(station, -depth)
+colnames(station) <- c("Station", "lat", "long", "freq")
 countmonsum <- plyr::join(data.frame(countmonsum), station)
 
 #### Plot months ####
@@ -57,7 +58,14 @@ base_map_month +
         legend.position = "bottom",
         axis.text = element_blank(),
         axis.ticks = element_blank()) +
-  guides(fill = "none")
+  guides(fill = "none",
+         size = guide_legend(nrow = 1)) +
+  
+  geom_text(data = countmonsum, aes(label = Month), x = Inf, y = Inf, hjust = 1.2, vjust = 1.5) +
+  theme(
+    strip.background = element_blank(),
+    strip.text = element_blank()
+  )
 
 # Save manually as Map_month_600x868px.png
 
