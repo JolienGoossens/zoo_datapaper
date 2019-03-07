@@ -20,6 +20,7 @@ count$Year <- year(count$Date)
 #count[count$Station == "",]$Station <- "ZG02" # "" seems to coincide entirely with ZG02
 count[count$Station == "W07BIS",]$Station <- "W07bis"
 
+count$Station <- as.factor(count$Station)
 count$Station <- factor(count$Station, levels = c("LW02", "W10", "LW01", "W09", "W07bis", "435", "421", "W08","780", "330", "ZG02", "710", "230", "215", "700", "130", "120"))
 
 # add frequency of station visits
