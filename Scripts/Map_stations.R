@@ -75,9 +75,13 @@ base_map <- ggplot() +
 base_map
 
 #### Read station positions ####
-station <- read.csv("Data/Positions/Jolien_locaties_zooplankton.csv", stringsAsFactors = F)
-colnames(station) <- c("station", "long", "lat")
-station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal")
+station <- read.delim("Data/Positions/Jolien_locaties_zooplankton.txt", stringsAsFactors=FALSE)
+
+station <- station %>% dplyr::select(-ID)
+colnames(station) <- c("station", "lat", "long", "depth")
+station$station <- gsub(" ", "", station$station) #correct typos
+
+station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal") #define frequency of station visits
 
 map_stations <- base_map +
   geom_point(data = station, aes(x = long, y = lat, shape = freq), size = 4) +
