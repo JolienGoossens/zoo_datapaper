@@ -43,7 +43,7 @@ countsum <- dplyr::summarize(group_by(count, Date2, Year, Month, Station, Freq, 
 countsum <- as.data.frame(countsum)
 
 #link tripactions to instrument
-net <- read.csv("Data/Jo_lien.csv", stringsAsFactors = F)
+net <- read.csv("Data/Jo_lien.csv", sep=";", stringsAsFactors = F)
 colnames(net) <- c("Tripaction","Instrument")
 
 net[net$Instrument == "Plankton Net Trawl 200\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
