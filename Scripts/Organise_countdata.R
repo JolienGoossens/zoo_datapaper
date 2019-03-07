@@ -73,6 +73,8 @@ ggplot(data = countsum, aes(x = Date2, y = Station)) +
         strip.background = element_rect(colour="black", fill="gray80")) +
   theme(axis.title = element_blank(),
         legend.position = "bottom",
-        legend.title = element_blank())
+        legend.title = element_blank()) + 
+  scale_x_date(date_labels = "%Y", date_breaks = "1 year")
 
 # Save the plot manually as Station_time_1000x334px.png
+
