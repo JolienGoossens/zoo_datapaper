@@ -29,6 +29,10 @@ station <- read.delim("Data/Positions/Jolien_locaties_zooplankton.txt", stringsA
 station <- station %>% dplyr::select(-ID)
 colnames(station) <- c("station", "lat", "long", "depth")
 station$station <- gsub(" ", "", station$station) #correct typos
+
+station$freq <- ifelse(station$station %in% c("ZG02", "215", "120", "130", "230", "330", "780", "710", "700"), "Monthly", "Seasonal") #define frequency of station visits
+
+statjoin <- dplyr::select(station, - long, -lat, - depth)
 colnames(statjoin) <- c("Station", "Freq")
 count <- join(count, statjoin)
 rm(statjoin)
