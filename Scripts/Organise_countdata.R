@@ -10,7 +10,7 @@ count <- read.csv2("Data/Count/ZooplanktonCounts.csv", stringsAsFactors = F)
 #### Preliminary data treatment ####
 count$X_id <- as.factor(count$X_id)
 count$Taxon <- as.factor(count$Taxon)
-count$Date <- parse_date_time(count$Date, orders = "dmy HM")
+count$Date <- parse_date_time(count$Date, orders = "dmy")
 count$Month <- month(count$Date)
 count$Year <- year(count$Date)
 
