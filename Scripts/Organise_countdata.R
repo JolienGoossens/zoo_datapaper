@@ -46,19 +46,18 @@ countsum <- as.data.frame(countsum)
 net <- read.csv("Data/Jo_lien.csv", sep=";", stringsAsFactors = F)
 colnames(net) <- c("Tripaction","Instrument")
 
-net[net$Instrument == "Plankton Net Trawl 200\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
+#net[net$Instrument == "Plankton Net Trawl 200\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
 net[net$Instrument == "Plankton Net WP2 200\xb5m/0.70m diam.",]$Instrument <- "WP2 net"
 net[net$Instrument == "Plankton Net 10\xb5m",]$Instrument <- "Apstein net"
-net[net$Instrument == "Plankton Net Trawl 100\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
+#net[net$Instrument == "Plankton Net Trawl 100\xb5m/1.0 m diam",]$Instrument <- "Apstein net"
 net[net$Instrument == "Plankton Pump",]$Instrument <- "Plankton pump"
 net[net$Instrument == "Plankton Net 60\xb5m",]$Instrument <- "Apstein net"
-net[net$Instrument == "Planktonnet 60\xb5m",]$Instrument <- "Apstein net"
+#net[net$Instrument == "Planktonnet 60\xb5m",]$Instrument <- "Apstein net"
 net[net$Instrument == "Niskin Bottle 10L",]$Instrument <- "Niskin bottle"
 net[net$Instrument == "Planktonnet WP2",]$Instrument <- "WP2 net"
 
 countsum <- join(countsum, net)
-countsum[countsum$Tripaction == 101025,]$Instrument <- "WP2 net" #one missing value, added manually
-
+#countsum[countsum$Tripaction == 101025,]$Instrument <- "WP2 net" #one missing value, added manually
 
 #### Plot the data availability per station ####
 ggplot(data = countsum, aes(x = Date2, y = Station)) +  
