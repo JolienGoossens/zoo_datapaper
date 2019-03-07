@@ -25,6 +25,10 @@ count$Station <- factor(count$Station, levels = c("LW02", "W10", "LW01", "W09", 
 
 # add frequency of station visits
 station <- read.delim("Data/Positions/Jolien_locaties_zooplankton.txt", stringsAsFactors=FALSE)
+
+station <- station %>% dplyr::select(-ID)
+colnames(station) <- c("station", "lat", "long", "depth")
+station$station <- gsub(" ", "", station$station) #correct typos
 colnames(statjoin) <- c("Station", "Freq")
 count <- join(count, statjoin)
 rm(statjoin)
