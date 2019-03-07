@@ -58,7 +58,9 @@ base_map_month +
         legend.position = "bottom",
         axis.text = element_blank(),
         axis.ticks = element_blank()) +
-  guides(fill = "none")
+  guides(fill = "none",
+         size = guide_legend(nrow = 1)) +
+  
 
 # Save manually as Map_month_600x868px.png
 
