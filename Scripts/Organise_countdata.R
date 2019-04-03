@@ -78,3 +78,4 @@ ggplot(data = countsum, aes(x = Date2, y = Station)) +
 
 # Save the plot manually as Station_time_1000x334px.png
 
+ggsave("Plots/zoo_count.pdf", plot = last_plot(), scale = 1.5, width = NA, height = NA, dpi = 600, limitsize = TRUE)
